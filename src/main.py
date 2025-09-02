@@ -2,13 +2,16 @@ import torch
 from torch import nn, optim
 from torch.utils.data import DataLoader
 from tqdm import tqdm
-
-from src.models import MultiTaskClassifier
-from src.utils.data_parser import load_data, preprocess_data
-from src.metrics.evaluator import evaluate_model, print_metrics
 import sys
-import os
-sys.path.append('/content/BERT_baselineModel')
+sys.path.append('/content/BERT_baselineModel/src')
+
+from models import MultiTaskClassifier
+from utils.data_parser import load_data, preprocess_data
+from metrics.evaluator import evaluate_model, print_metrics
+from config.config import (
+    MODEL_NAME, NUM_LABELS, EPOCHS, LEARNING_RATE, 
+    BATCH_SIZE, MAX_LENGTH, TEST_SIZE, RANDOM_SEED, DROPOUT_RATE
+)
 
 
 def main() -> None:
@@ -16,20 +19,18 @@ def main() -> None:
 
     # Load and preprocess data
     examples, label_map = load_data("/content/dev_testset.json")
-    train_ds, test_ds = preprocess_data(examples)
+    train_ds, test_ds = preprocess_data(examples, MODEL_NAME, MAX_LENGTH, TEST_SIZE, RANDOM_SEED)
 
     # Create data loaders
-    train_loader = DataLoader(train_ds, batch_size=16, shuffle=True)
-    test_loader = DataLoader(test_ds, batch_size=16)
+    train_loader = DataLoader(train_ds, batch_size=BATCH_SIZE, shuffle=True)
+    test_loader = DataLoader(test_ds, batch_size=BATCH_SIZE)
 
     # Initialize model
-    model_name = "bert-base-uncased"
-    model = MultiTaskClassifier(model_name, num_labels=3).to(device)
+    model = MultiTaskClassifier(MODEL_NAME, num_labels=NUM_LABELS, dropout_rate=DROPOUT_RATE).to(device)
 
     # Training setup
-    optimizer = optim.AdamW(model.parameters(), lr=2e-5)
+    optimizer = optim.AdamW(model.parameters(), lr=LEARNING_RATE)
     criterion = nn.CrossEntropyLoss()
-    EPOCHS = 7
 
     # Training loop
     for epoch in range(EPOCHS):

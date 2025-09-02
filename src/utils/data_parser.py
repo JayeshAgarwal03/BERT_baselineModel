@@ -27,7 +27,8 @@ def load_data(file_path: str):
     return examples, label_map
 
 
-def preprocess_data(examples, model_name: str = "bert-base-uncased"):
+def preprocess_data(examples, model_name: str = "bert-base-uncased", max_length: int = 128, 
+                   test_size: float = 0.2, random_seed: int = 42):
     """Preprocess data using tokenizer and split into train/test sets."""
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     
@@ -37,11 +38,11 @@ def preprocess_data(examples, model_name: str = "bert-base-uncased"):
             batch["response"],
             truncation=True,
             padding="max_length",
-            max_length=128,
+            max_length=max_length,
         )
     
     hf_dataset = HFDataset.from_list(examples)
-    hf_dataset = hf_dataset.train_test_split(test_size=0.2, seed=42)
+    hf_dataset = hf_dataset.train_test_split(test_size=test_size, seed=random_seed)
     train_ds, test_ds = hf_dataset["train"], hf_dataset["test"]
     
     # Apply preprocessing

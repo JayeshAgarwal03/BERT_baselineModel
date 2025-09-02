@@ -4,7 +4,7 @@ from transformers import AutoModel, T5EncoderModel
 
 
 class MultiTaskClassifier(nn.Module):
-    def __init__(self, model_name: str, num_labels: int = 3) -> None:
+    def __init__(self, model_name: str, num_labels: int = 3, dropout_rate: float = 0.2) -> None:
         super().__init__()
 
         if "t5" in model_name:
@@ -15,7 +15,7 @@ class MultiTaskClassifier(nn.Module):
         hidden_size = (
             self.encoder.config.d_model if "t5" in model_name else self.encoder.config.hidden_size
         )
-        self.dropout = nn.Dropout(0.2)
+        self.dropout = nn.Dropout(dropout_rate)
         self.mistake_head = nn.Linear(hidden_size, num_labels)
         self.guidance_head = nn.Linear(hidden_size, num_labels)
 
