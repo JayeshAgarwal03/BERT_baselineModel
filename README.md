@@ -1,27 +1,36 @@
 ## BERT Baseline Model
 
-Structured Python project for multi-task classification over paired inputs (history, response) using Hugging Face Transformers.
+Multi-task classification model for paired inputs (history, response) using Hugging Face Transformers.
 
-### Structure
-- `src/`: Python package with training script and model definitions
-  - `src/main.py`: Training and evaluation script (logic unchanged)
-  - `src/models/multitask.py`: `MultiTaskClassifier` model definition
-- `data/`: Place datasets here if desired (script currently reads `/content/dev_testset.json`)
-- `requirements.txt`: Dependencies
+### Quick Start
 
-### Setup
-1. (Recommended) Create and activate a virtual environment.
-2. Install dependencies:
-```bash
-pip install -r requirements.txt
+#### Colab
+```python
+!git clone https://github.com/JayeshAgarwal03/BERT_baselineModel.git
+%cd BERT_baselineModel
+!pip install -r requirements.txt
+!python src/main.py
 ```
 
-### Run
-Ensure the dataset is available at `/content/dev_testset.json` (unchanged). Then run:
+#### Local
 ```bash
+pip install -r requirements.txt
 python -m src.main
 ```
 
-### Notes
-- Logic and hyperparameters are intentionally unchanged.
-- If you move your dataset into `data/`, update the path in `src/main.py` accordingly.
+### Structure
+- `src/main.py` - Training script
+- `src/models/` - Model definition
+- `src/utils/` - Data processing
+- `src/metrics/` - Evaluation
+- `src/config/` - Hyperparameters
+
+### Dataset
+Place `dev_testset.json` at `/content/dev_testset.json` or update path in `src/main.py`.
+
+### Config
+Edit `src/config/config.py` to modify:
+- Model: `MODEL_NAME`, `EPOCHS`, `LEARNING_RATE`
+- Data: `BATCH_SIZE`, `MAX_LENGTH`
+
+
