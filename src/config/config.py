@@ -1,5 +1,5 @@
 # Model Configuration
-MODEL_NAME = "bert-base-uncased"  # Other options: "t5-base", "facebook/bart-base"
+MODEL_NAME = "bert-base-uncased"
 NUM_LABELS = 3
 
 # Training Configuration
@@ -19,3 +19,4 @@ DROPOUT_RATE = 0.2
 # - "bert-base-uncased": BERT model (default)
 # - "t5-base": T5 encoder model
 # - "facebook/bart-base": BART model
+# - "roberta-base" : RoBERTa model

@@ -30,7 +30,5 @@ Place `dev_testset.json` at `/content/dev_testset.json` or update path in `src/m
 
 ### Config
 Edit `src/config/config.py` to modify:
-- Model: `MODEL_NAME`, `EPOCHS`, `LEARNING_RATE`
+- **Model**: Set `MODEL_NAME` (see available options in `config.py`), `EPOCHS`, and `LEARNING_RATE`
 - Data: `BATCH_SIZE`, `MAX_LENGTH`
-
-
