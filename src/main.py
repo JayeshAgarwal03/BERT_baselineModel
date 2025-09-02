@@ -2,8 +2,6 @@ import torch
 from torch import nn, optim
 from torch.utils.data import DataLoader
 from tqdm import tqdm
-import sys
-sys.path.append('/content/BERT_baselineModel/src')
 
 from models import MultiTaskClassifier
 from utils.data_parser import load_data, preprocess_data
