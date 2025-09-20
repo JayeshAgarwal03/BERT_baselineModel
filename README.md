@@ -14,6 +14,8 @@ Multi-task classification model for paired inputs (history, response) using Hugg
 
 #### Local
 ```bash
+git clone https://github.com/JayeshAgarwal03/BERT_baselineModel.git
+cd BERT_baselineModel
 pip install -r requirements.txt
 python -m src.main
 ```
