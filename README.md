@@ -1,6 +1,6 @@
 ## BERT Baseline Model
 
-Multi-task classification model for paired inputs (history, response) using Hugging Face Transformers.
+Multi task classification model for paired inputs (history, response) using Hugging Face Transformers.
 
 ### Quick Start
 
